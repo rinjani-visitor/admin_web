@@ -42,7 +42,7 @@ const Page = async () => {
         </thead>
         <tbody className="odd:bg-slate-400">
           {
-            data.map((item, index) => (
+            data?.map((item, index) => (
               <tr key={index} className="odd:bg-slate-100">
                 <th>{index + 1}</th>
                 <td>{item.bookingId}</td>
