@@ -1,5 +1,6 @@
 import Approve from "@/components/payment/approve";
 import Declined from "@/components/payment/declined";
+import DetailPayment from "@/components/payment/detail";
 import getBaseURL from "@/libs/getBaseURL"
 import { getCookie } from "cookies-next"
 import { cookies } from 'next/headers';
@@ -54,7 +55,7 @@ const Page = async () => {
                 <td>{item.paymentStatus}</td>
                 <td>{item.customerName}</td>
                 <td>{item.customerCountry}</td>
-                <td className="flex space-x-4 items-center ">
+                <td className="flex space-x-4 justify-end">
                   {item.paymentStatus === 'Need a Review' ?
                     (
                       <>
@@ -63,6 +64,7 @@ const Page = async () => {
                       </>
                     ) : null
                   }
+                  <DetailPayment {...item}/>
                 </td>
               </tr>
             ))
