@@ -2,10 +2,16 @@ import Approve from "@/components/payment/approve";
 import Declined from "@/components/payment/declined";
 import DetailPayment from "@/components/payment/detail";
 import getBaseURL from "@/libs/getBaseURL"
-import { getCookie } from "cookies-next"
+import { getCookie, hasCookie } from "cookies-next"
 import { cookies } from 'next/headers';
+import { redirect } from "next/navigation";
 
 const fetchData = async () => {
+  const cookie = hasCookie('accessToken', { cookies })
+  if (!cookie) {
+    redirect('/')
+  }
+
   try {
     const response = await fetch(getBaseURL('/payment'), {
       method: "GET",
@@ -64,7 +70,7 @@ const Page = async () => {
                       </>
                     ) : null
                   }
-                  <DetailPayment {...item}/>
+                  <DetailPayment {...item} />
                 </td>
               </tr>
             ))

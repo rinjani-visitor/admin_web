@@ -1,6 +1,13 @@
-import React from 'react'
+import { hasCookie } from "cookies-next"
+import { redirect } from "next/navigation";
+import { cookies } from "next/headers"
 
 const Page = () => {
+  const cookie = hasCookie('accessToken', { cookies })
+  if (!cookie) {
+    redirect('/')
+  }
+
   return (
     <div>ini dashboard</div>
   )
