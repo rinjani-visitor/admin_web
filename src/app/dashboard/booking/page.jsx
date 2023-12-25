@@ -1,5 +1,6 @@
 import Approve from "@/components/booking/approve";
 import Declined from "@/components/booking/declined";
+import DetailBooking from "@/components/booking/detail";
 import getBaseURL from "@/libs/getBaseURL"
 import { getCookie } from "cookies-next"
 import { cookies } from 'next/headers';
@@ -51,7 +52,7 @@ const Page = async () => {
                 <td>{item.title}</td>
                 <td>{item.customerName}</td>
                 <td>{item.customerCountry}</td>
-                <td className="flex space-x-4">
+                <td className="flex space-x-4 justify-end">
                   {item.bookingStatus === 'Offering' ?
                     (
                       <>
@@ -60,6 +61,7 @@ const Page = async () => {
                       </>
                     ) : null
                   }
+                  <DetailBooking {...item} />
                 </td>
               </tr>
             ))
