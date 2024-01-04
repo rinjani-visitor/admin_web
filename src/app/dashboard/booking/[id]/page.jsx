@@ -27,8 +27,13 @@ const Page = async ({ params }) => {
     <>
       <div className="max-w-4xl p-4 space-y-4">
         <div className="flex space-x-6 items-center">
-          <h1 className="font-semibold text-2xl text-rinjaniVisitor-green">Booking Details</h1>
-          <p>{data?.bookingStatus}</p>
+          <h1 className="font-semibold text-2xl text-gray-600">Booking Details</h1>
+          {data?.bookingStatus === 'Offering' ? <p className="bg-blue-100 text-blue-500 font-semibold py-2 px-5 rounded-full text-sm">Offering</p> : null}
+          {data?.bookingStatus === 'Waiting for Payment' ? <p className="bg-yellow-100 text-yellow-500 font-semibold py-2 px-5 rounded-full text-sm">Waiting for Payment</p> : null}
+          {data?.bookingStatus === 'Declined' ? <p className="bg-red-100 text-red-500 font-semibold py-2 px-5 rounded-full text-sm">Declined</p> : null}
+          {data?.bookingStatus === 'Payment Reviewing' ? <p className="bg-purple-100 text-purple-500 font-semibold py-2 px-5 rounded-full text-sm">Payment Reviewing</p> : null}
+          {data?.bookingStatus === 'Payment Failed' ? <p className="bg-red-100 text-red-500 font-semibold py-2 px-5 rounded-full text-sm">Payment Failed</p> : null}
+          {data?.bookingStatus === 'Success' ? <p className="bg-green-100 text-green-500 font-semibold py-2 px-5 rounded-full text-sm">Success</p> : null}
           {/* <BookingStatus status={data?.paymentStatus} /> */}
         </div>
         <div className="text-sm text-slate-600 space-y-1">
@@ -55,7 +60,7 @@ const Page = async ({ params }) => {
             </div>
             <div className="mb-4">
               <h1 className="text-lg font-semibold text-rinjaniVisitor-green">Add On</h1>
-              <p className="text-base">{data?.addOns}%</p>
+              {data?.addOns.length > 0 ? <p className="text-base">{data?.addOns}</p> : <p className="text-base">No Add On</p>}
             </div>
           </div>
         </div>

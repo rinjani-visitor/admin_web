@@ -42,8 +42,9 @@ const Page = async () => {
             <th>Total</th>
             <th>Method</th>
             <th>Status</th>
-            <th>Customer Name</th>
-            <th>Customer Countery</th>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Country</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -58,6 +59,7 @@ const Page = async () => {
                 <td>{item.total}</td>
                 <td>{item.method}</td>
                 <td>{item.paymentStatus}</td>
+                <td>{item.updatePaymentDate}</td>
                 <td>{item.customerName}</td>
                 <td>{item.customerCountry}</td>
                 <td className="flex space-x-4 justify-end">
@@ -69,7 +71,11 @@ const Page = async () => {
                       </>
                     ) : null
                   }
-                  <DetailPayment {...item} />
+                  {item.paymentStatus !== 'Pending' ?
+                    (
+                      <DetailPayment {...item} />
+                    ) : null
+                  }
                 </td>
               </tr>
             ))

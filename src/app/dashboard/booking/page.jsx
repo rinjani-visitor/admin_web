@@ -33,11 +33,11 @@ const Page = async () => {
           <tr>
             <th></th>
             <th>Booking ID</th>
-            <th>Booking Status</th>
-            <th>Booking Date</th>
+            <th>Status</th>
+            <th>Date</th>
             <th>Title</th>
-            <th>Customer Name</th>
-            <th>Customer Country</th>
+            <th>Name</th>
+            <th>Country</th>
             <th>Action</th>
           </tr>
         </thead>
