@@ -27,8 +27,8 @@ const Page = async ({ params }) => {
     <>
       <div className="max-w-4xl p-4 space-y-4">
         <div className="flex space-x-6 items-center">
-          <h1 className="font-semibold text-2xl text-rinjaniVisitor-green">Payment Details</h1>
-          <p>{data?.paymentStatus}</p>
+          <h1 className="font-semibold text-2xl text-gray-600">Payment Details</h1>
+          <p className="bg-green-100 text-green-500 font-semibold py-2 px-5 rounded-full text-sm">{data?.paymentStatus}</p>
           {/* <BookingStatus status={data?.paymentStatus} /> */}
         </div>
         <div className="text-sm text-slate-600 space-y-1">
@@ -37,7 +37,7 @@ const Page = async ({ params }) => {
         <div className="grid md:grid-cols-2 gap-6">
           <div className="">
             <Image src={data?.imageProofTransfer} height={500} width={500} alt="thumbnail product" className="rounded-2xl" />
-            <h1 className="font-semibold mt-2 text-2xl text-gray-700 max-sm:text-lg max-lg:text-xl ">{data?.title}</h1>
+            <h1 className="font-semibold mt-2 text-2xl text-gray-500 max-sm:text-lg max-lg:text-xl ">{data?.title}</h1>
           </div>
           <div className="">
             <div className="mb-4">
@@ -57,11 +57,11 @@ const Page = async ({ params }) => {
               <p>{data?.method}</p>
             </div>
             <div className="mb-4">
-              <h1 className="text-lg font-semibold text-rinjaniVisitor-green">Bank / Wise Account Name</h1>
+              <h1 className="text-lg font-semibold text-rinjaniVisitor-green">{data?.method} Account Name</h1>
               <p>{data?.bankNameOrWiseEmail}</p>
             </div>
             <div className="mb-4">
-              <h1 className="text-lg font-semibold text-rinjaniVisitor-green">Bank / Wise Name</h1>
+              <h1 className="text-lg font-semibold text-rinjaniVisitor-green">{data?.method} Name</h1>
               <p>{data?.bankAccountNameOrWiseAccountName}</p>
             </div>
             <div className="mb-4">
