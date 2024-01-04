@@ -7,11 +7,6 @@ import { cookies } from 'next/headers';
 import { redirect } from "next/navigation";
 
 const fetchData = async () => {
-  const cookie = hasCookie('accessToken', { cookies })
-  if (!cookie) {
-    redirect('/')
-  }
-
   try {
     const response = await fetch(getBaseURL('/payment'), {
       method: "GET",
@@ -28,6 +23,10 @@ const fetchData = async () => {
 }
 
 const Page = async () => {
+  const cookie = hasCookie('accessToken', { cookies })
+  if (!cookie) {
+    redirect('/')
+  }
   const data = await fetchData()
 
   return (
