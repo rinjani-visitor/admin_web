@@ -1,16 +1,14 @@
-import { hasCookie } from "cookies-next"
+import { hasCookie } from "cookies-next";
 import { redirect } from "next/navigation";
-import { cookies } from "next/headers"
+import { cookies } from "next/headers";
 
-const Page = () => {
-  const cookie = hasCookie('accessToken', { cookies })
+const Page = async () => {
+  const cookie = hasCookie("accessToken", { cookies });
   if (!cookie) {
-    redirect('/')
+    redirect("/");
   }
 
-  return (
-    <div>ini dashboard</div>
-  )
-}
+  return <div>ini dashboard</div>;
+};
 
-export default Page
+export default Page;

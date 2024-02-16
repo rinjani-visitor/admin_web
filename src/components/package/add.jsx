@@ -20,8 +20,6 @@ const AddPackage = ({ data, sub }) => {
   const [status, setStatus] = useState("");
   const [file, setFile] = useState();
 
-  console.log(file);
-
   const handleModal = () => {
     setIsOpen(!isOpen);
   };
@@ -33,12 +31,12 @@ const AddPackage = ({ data, sub }) => {
       const fileRef = ref(analytics, `rinjanivisitor_admin/${file.name}`);
       uploadBytes(fileRef, file).then((data) => {
         getDownloadURL(data.ref).then(async (url) => {
-          console.log(url);
           const body = {
             title,
             categoryId,
             subCategoryId,
-            lowestPrice,
+            lowestPrice: `${lowestPrice}`,
+            location,
             status,
             thumbnail: url,
           };
@@ -52,11 +50,11 @@ const AddPackage = ({ data, sub }) => {
             body: JSON.stringify(body),
           });
 
-          console.log(response);
-
           if (response.ok) {
             alert("Product added successfully");
+            router.refresh();
           } else {
+            router.refresh();
             alert("Failed to add product. Server returned:");
           }
         });
@@ -100,7 +98,7 @@ const AddPackage = ({ data, sub }) => {
                 value={categoryId}
                 onChange={(e) => {
                   const selectedCategoryId = parseInt(e.target.value, 10);
-                  setCategoryId(selectedCategoryId);
+                  setCategoryId(e.target.value);
 
                   const filter = sub.filter(
                     (item) => item.categoryId === selectedCategoryId

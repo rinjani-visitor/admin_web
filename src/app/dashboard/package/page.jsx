@@ -4,6 +4,10 @@ import { cookies } from "next/headers";
 import AddPackage from "@/components/package/add";
 import getBaseURL from "@/libs/getBaseURL";
 import Image from "next/image";
+import Delete from "@/components/package/delete";
+import AddDetail from "@/components/package/addDetail";
+import AddFoto from "@/components/package/addFoto";
+import EditPackage from "@/components/package/edit";
 
 const fetchData = async () => {
   try {
@@ -59,7 +63,6 @@ const Page = async () => {
     redirect("/");
   }
 
-  // const data = await fetchData();
   const [data, categories, subCategories] = await Promise.all([
     fetchData(),
     fetchCategories(),
@@ -100,11 +103,17 @@ const Page = async () => {
                   width={500}
                   height={500}
                   alt="thumbnail product"
-                  className="w-44 object-contain"
+                  className="w-44 object-contain aspect-square"
                 />
               </td>
               <td className="flex space-x-4 justify-end">
-                <p>action</p>
+                <EditPackage PackageId={item.productId} />
+                <AddDetail
+                  PackageId={item.productId}
+                  Category={item.category}
+                />
+                <AddFoto packageId={item.productId} />
+                <Delete PackageId={item.productId} />
               </td>
             </tr>
           ))}
