@@ -8,6 +8,7 @@ import Delete from "@/components/package/delete";
 import AddDetail from "@/components/package/addDetail";
 import AddFoto from "@/components/package/addFoto";
 import EditPackage from "@/components/package/edit";
+import Link from "next/link";
 
 const fetchData = async () => {
   try {
@@ -92,7 +93,11 @@ const Page = async () => {
           {data?.map((item, index) => (
             <tr key={index} className="odd:bg-slate-100">
               <th>{index + 1}</th>
-              <td>{item.title}</td>
+              <td>
+                <Link href={`/dashboard/package/${item.productId}`}>
+                  {item.title}
+                </Link>
+              </td>
               <td>{item.category}</td>
               <td>{item.location}</td>
               <td>{item.lowestPrice}</td>
