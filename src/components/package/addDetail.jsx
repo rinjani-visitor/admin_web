@@ -50,8 +50,8 @@ const AddDetail = ({ PackageId, Category }) => {
 
       console.log(res);
 
-      if (res.ok) {
-        alert("Product added successfully");
+      if (req.ok) {
+        alert("Detail added successfully");
       } else {
         alert("Failed to add product. Server returned:");
       }
@@ -59,6 +59,10 @@ const AddDetail = ({ PackageId, Category }) => {
       console.error("Error during fetch operation:", error);
     } finally {
       setIsOpen(false);
+      setDesription("");
+      setDuration("");
+      setNote("");
+      setProgram("");
     }
   };
 
