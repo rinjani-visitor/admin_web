@@ -6,7 +6,6 @@ import getBaseURL from "@/libs/getBaseURL";
 import Image from "next/image";
 import Delete from "@/components/package/delete";
 import AddDetail from "@/components/package/addDetail";
-import AddFoto from "@/components/package/addFoto";
 import EditPackage from "@/components/package/edit";
 import Link from "next/link";
 
@@ -94,7 +93,10 @@ const Page = async () => {
             <tr key={index} className="odd:bg-slate-100">
               <th>{index + 1}</th>
               <td>
-                <Link href={`/dashboard/package/${item.productId}`}>
+                <Link
+                  href={`/dashboard/package/${item.productId}`}
+                  className="hover:underline "
+                >
                   {item.title}
                 </Link>
               </td>
@@ -108,16 +110,20 @@ const Page = async () => {
                   width={500}
                   height={500}
                   alt="thumbnail product"
-                  className="w-44 object-contain aspect-square"
+                  className="w-44 object-cover aspect-square"
                 />
               </td>
               <td className="flex space-x-4 justify-end">
-                <EditPackage PackageId={item.productId} />
+                <EditPackage
+                  id={item.productId}
+                  data={categories}
+                  sub={subCategories}
+                  item={item}
+                />
                 <AddDetail
                   PackageId={item.productId}
                   Category={item.category}
                 />
-                <AddFoto packageId={item.productId} />
                 <Delete PackageId={item.productId} />
               </td>
             </tr>

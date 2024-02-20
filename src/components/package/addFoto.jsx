@@ -7,17 +7,23 @@ import { analytics } from "@/app/firebase/firebase-config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import getBaseURL from "@/libs/getBaseURL";
 import { getCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
+import useStore from "@/store";
 
 const AddFoto = ({ packageId }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [file, setFile] = useState([]);
-  const [fotos, setFoto] = useState([]);
+
+  const { isLoading, setIsLoading } = useStore();
+
+  const router = useRouter();
 
   const handlerModal = () => {
     setIsOpen(!isOpen);
   };
 
   const submitPhotos = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
 
     const urls = [];
@@ -49,32 +55,16 @@ const AddFoto = ({ packageId }) => {
     } catch (error) {
     } finally {
       setIsOpen(false);
+      setIsLoading(false);
+      router.refresh();
     }
   };
-
-  const fetchFoto = async () => {
-    try {
-      const req = await fetch(getBaseURL(`/products/baru/${packageId}`), {
-        headers: {
-          Authorization: `Bearer ${getCookie("accessToken")}`,
-        },
-      });
-      const res = await req.json();
-      console.log(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchFoto();
-  }, []);
 
   return (
     <>
       <button
         onClick={handlerModal}
-        className="btn btn-warning aspect-square p-0 btn-sm items-center"
+        className="btn btn-warning aspect-square p-0 btn-sm items-center absolute right-0 top-0"
       >
         <Image size={24} fill="white" />
       </button>
@@ -88,7 +78,7 @@ const AddFoto = ({ packageId }) => {
           </button>
           <form onSubmit={submitPhotos} className="space-y-4">
             <div className="form-control">
-              <label className="mb-2">Thumbnail</label>
+              <label className="mb-2">Add Foto</label>
               <input
                 required
                 multiple
@@ -97,7 +87,11 @@ const AddFoto = ({ packageId }) => {
                 className="file-input w-full file-input-bordered"
               />
             </div>
-            <button type="submit" className="btn btn-neutral w-full text-white">
+            <button
+              type="submit"
+              className="btn btn-neutral w-full text-white"
+              disabled={isLoading}
+            >
               Submit
             </button>
           </form>
