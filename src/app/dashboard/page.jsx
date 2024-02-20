@@ -34,9 +34,12 @@ const Page = async () => {
     <div className="">
       <div className="grid grid-cols-3 gap-4">
         {Object.entries(data).map(([key, value]) => (
-          <div key={key} className="mb-4 bg-slate-500 p-4 rounded-lg flex justify-center">
-            <p className="font-bold">{key}:</p>
-            <p>{value}</p>
+          <div
+            key={key}
+            className="mb-4 bg-slate-500 p-4 rounded-lg flex flex-col items-center text-white"
+          >
+            <p className="font-normal">{key}</p>
+            <p className="text-4xl font-semibold">{value}</p>
           </div>
         ))}
       </div>
