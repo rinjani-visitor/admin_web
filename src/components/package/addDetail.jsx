@@ -15,6 +15,7 @@ const AddDetail = ({ PackageId, Category }) => {
   const [duration, setDuration] = useState("");
   const [program, setProgram] = useState("");
   const [note, setNote] = useState("");
+  const [route, setRoute] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
@@ -37,6 +38,7 @@ const AddDetail = ({ PackageId, Category }) => {
       productId: PackageId,
       startDate: startDate ? startDate : undefined,
       endDate: endDate ? endDate : undefined,
+      route: route ? route : undefined,
     };
 
     try {
@@ -62,10 +64,11 @@ const AddDetail = ({ PackageId, Category }) => {
       setDuration("");
       setNote("");
       setProgram("");
+      setRoute("");
+      setStartDate("");
+      setEndDate("");
     }
   };
-
-  const isProgram = ["event", "homestay"];
 
   return (
     <>
@@ -97,23 +100,33 @@ const AddDetail = ({ PackageId, Category }) => {
                 className="input input-bordered w-full"
               />
             </div>
-            {Category !== "homestay" && Category !== "event" ? (
+            {["rinjani"].includes(Category) && (
+              <>
+                {[
+                  { label: "Duration", stateSetter: setDuration },
+                  { label: "Program", stateSetter: setProgram },
+                ].map((input, index) => (
+                  <div key={index} className="form-control">
+                    <label className="mb-2">{input.label}</label>
+                    <input
+                      required
+                      onChange={(e) => input.stateSetter(e.target.value)}
+                      type="text"
+                      placeholder="Type here"
+                      className="input input-bordered w-full"
+                    />
+                  </div>
+                ))}
+              </>
+            )}
+
+            {Category === "culture" || Category === "landscape" ? (
               <>
                 <div className="form-control">
-                  <label className="mb-2">Duration</label>
+                  <label className="mb-2">Route</label>
                   <input
                     required
-                    onChange={(e) => setDuration(e.target.value)}
-                    type="text"
-                    placeholder="Type here"
-                    className="input input-bordered w-full"
-                  />
-                </div>
-                <div className="form-control">
-                  <label className="mb-2">Program</label>
-                  <input
-                    required
-                    onChange={(e) => setProgram(e.target.value)}
+                    onChange={(e) => setRoute(e.target.value)}
                     type="text"
                     placeholder="Type here"
                     className="input input-bordered w-full"
@@ -121,6 +134,7 @@ const AddDetail = ({ PackageId, Category }) => {
                 </div>
               </>
             ) : null}
+
             <div className="form-control">
               <label className="mb-2">Note</label>
               <input
@@ -131,6 +145,7 @@ const AddDetail = ({ PackageId, Category }) => {
                 className="input input-bordered w-full"
               />
             </div>
+
             {Category === "event" ? (
               <>
                 <div className="form-control">
@@ -155,6 +170,7 @@ const AddDetail = ({ PackageId, Category }) => {
                 </div>
               </>
             ) : null}
+
             <button type="submit" className="btn btn-neutral w-full text-white">
               Submit
             </button>
