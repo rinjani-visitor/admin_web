@@ -24,7 +24,6 @@ const Page = async () => {
   const cookie = hasCookie("accessToken", { cookies });
 
   const data = await fetchData();
-  console.log(data);
 
   if (!cookie) {
     redirect("/");

@@ -15,6 +15,10 @@ const AddDetail = ({ PackageId, Category }) => {
   const [duration, setDuration] = useState("");
   const [program, setProgram] = useState("");
   const [note, setNote] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+
+  console.log(startDate, endDate);
 
   const endpoint = {
     rinjani: `/products/rinjani`,
@@ -26,14 +30,15 @@ const AddDetail = ({ PackageId, Category }) => {
 
   const submitAddDetail = async (e) => {
     e.preventDefault();
-    console.log(endpoint[Category]);
 
     const body = {
       description,
-      duration,
-      program,
+      duration: duration ? duration : undefined,
+      program: program ? program : undefined,
       note,
       productId: PackageId,
+      startDate: startDate ? startDate : undefined,
+      endDate: endDate ? endDate : undefined,
     };
 
     try {
@@ -47,8 +52,6 @@ const AddDetail = ({ PackageId, Category }) => {
       });
 
       const res = await req.json();
-
-      console.log(res);
 
       if (req.ok) {
         alert("Detail added successfully");
@@ -77,6 +80,7 @@ const AddDetail = ({ PackageId, Category }) => {
 
       <div className={`modal ${isOpen ? "modal-open" : ""}`}>
         <div className="modal-box">
+          <h1 className="text-2xl font">Add Detail</h1>
           <button
             onClick={handlerModal}
             className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
@@ -95,26 +99,30 @@ const AddDetail = ({ PackageId, Category }) => {
                 className="input input-bordered w-full"
               />
             </div>
-            <div className="form-control">
-              <label className="mb-2">Duration</label>
-              <input
-                required
-                onChange={(e) => setDuration(e.target.value)}
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered w-full"
-              />
-            </div>
-            <div className="form-control">
-              <label className="mb-2">Program</label>
-              <input
-                required
-                onChange={(e) => setProgram(e.target.value)}
-                type="text"
-                placeholder="Type here"
-                className="input input-bordered w-full"
-              />
-            </div>
+            {Category !== "homestay" ? (
+              <>
+                <div className="form-control">
+                  <label className="mb-2">Duration</label>
+                  <input
+                    required
+                    onChange={(e) => setDuration(e.target.value)}
+                    type="text"
+                    placeholder="Type here"
+                    className="input input-bordered w-full"
+                  />
+                </div>
+                <div className="form-control">
+                  <label className="mb-2">Program</label>
+                  <input
+                    required
+                    onChange={(e) => setProgram(e.target.value)}
+                    type="text"
+                    placeholder="Type here"
+                    className="input input-bordered w-full"
+                  />
+                </div>
+              </>
+            ) : null}
             <div className="form-control">
               <label className="mb-2">Note</label>
               <input
@@ -125,6 +133,30 @@ const AddDetail = ({ PackageId, Category }) => {
                 className="input input-bordered w-full"
               />
             </div>
+            {Category === "event" ? (
+              <>
+                <div className="form-control">
+                  <label className="mb-2">Start Date</label>
+                  <input
+                    required
+                    onChange={(e) => setStartDate(e.target.value)}
+                    type="datetime-local"
+                    placeholder="Type here"
+                    className="input input-bordered w-full"
+                  />
+                </div>
+                <div className="form-control">
+                  <label className="mb-2">End Date</label>
+                  <input
+                    required
+                    onChange={(e) => setEndDate(e.target.value)}
+                    type="datetime-local"
+                    placeholder="Type here"
+                    className="input input-bordered w-full"
+                  />
+                </div>
+              </>
+            ) : null}
             <button type="submit" className="btn btn-neutral w-full text-white">
               Submit
             </button>

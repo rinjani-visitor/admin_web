@@ -122,7 +122,7 @@ const Page = async ({ params }) => {
             Add On
           </h1>
           <p className="text-base">
-            {data?.addOns.lenght > 0 ? data.addOns.join(", ") : "-"}
+            {data.addOns.length > 0 ? data.addOns.join(", ") : "-"}
           </p>
         </div>
       </div>
