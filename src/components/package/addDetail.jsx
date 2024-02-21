@@ -18,8 +18,6 @@ const AddDetail = ({ PackageId, Category }) => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  console.log(startDate, endDate);
-
   const endpoint = {
     rinjani: `/products/rinjani`,
     homestay: `/products/homestay`,
@@ -51,8 +49,6 @@ const AddDetail = ({ PackageId, Category }) => {
         body: JSON.stringify(body),
       });
 
-      const res = await req.json();
-
       if (req.ok) {
         alert("Detail added successfully");
       } else {
@@ -68,6 +64,8 @@ const AddDetail = ({ PackageId, Category }) => {
       setProgram("");
     }
   };
+
+  const isProgram = ["event", "homestay"];
 
   return (
     <>
@@ -99,7 +97,7 @@ const AddDetail = ({ PackageId, Category }) => {
                 className="input input-bordered w-full"
               />
             </div>
-            {Category !== "homestay" ? (
+            {Category !== "homestay" && Category !== "event" ? (
               <>
                 <div className="form-control">
                   <label className="mb-2">Duration</label>
