@@ -5,6 +5,7 @@ import { getCookie } from "cookies-next";
 import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 const fetchData = async (id) => {
   try {
@@ -29,7 +30,9 @@ const fetchData = async (id) => {
 const Page = async ({ params }) => {
   const { id } = params;
 
-  if (data.description === null) {
+  const data = await fetchData(id);
+
+  if (data?.description === null || data === null) {
     return (
       <>
         <h1>Tambahkan Detail Package</h1>
