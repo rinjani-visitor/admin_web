@@ -64,7 +64,7 @@ const AddFoto = ({ packageId }) => {
     <>
       <button
         onClick={handlerModal}
-        className="btn btn-warning aspect-square p-0 btn-sm items-center absolute right-0 top-0"
+        className="btn btn-warning aspect-square p-0 btn-sm items-center"
       >
         <Image size={24} fill="white" />
       </button>

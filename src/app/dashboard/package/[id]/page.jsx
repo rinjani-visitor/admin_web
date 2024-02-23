@@ -1,5 +1,6 @@
 import AddFoto from "@/components/package/addFoto";
 import DeletePoto from "@/components/package/deletePoto";
+import EditDetail from "@/components/package/editDetail";
 import { getCookie } from "cookies-next";
 import { cookies } from "next/headers";
 import Image from "next/image";
@@ -28,9 +29,9 @@ const fetchData = async (id) => {
 const Page = async ({ params }) => {
   const { id } = params;
 
-  const data = await fetchData(id);
+  console.log(data.description);
 
-  if (!data || data.length === 0) {
+  if (data.description === null) {
     return (
       <>
         <h1>Tambahkan Detail Package</h1>
@@ -154,7 +155,10 @@ const Page = async ({ params }) => {
         </h1>
         <p className="text-base">{data?.updatedAt}</p>
       </div>
-      <AddFoto packageId={id} />
+      <div className="absolute right-0 top-0 flex space-x-4">
+        <AddFoto packageId={id} />
+        <EditDetail data={data} />
+      </div>
     </div>
   );
 };

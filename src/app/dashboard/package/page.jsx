@@ -123,6 +123,7 @@ const Page = async () => {
                 <AddDetail
                   PackageId={item.productId}
                   Category={item.category}
+                  isDisable={item.isHaveDetail}
                 />
                 <Delete PackageId={item.productId} />
               </td>
