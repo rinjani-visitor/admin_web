@@ -29,8 +29,6 @@ const fetchData = async (id) => {
 const Page = async ({ params }) => {
   const { id } = params;
 
-  console.log(data.description);
-
   if (data.description === null) {
     return (
       <>
