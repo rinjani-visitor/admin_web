@@ -1,11 +1,15 @@
+import AddAddOn from "@/components/package/addAddOn";
+import AddFacilities from "@/components/package/addFacilities";
 import AddFoto from "@/components/package/addFoto";
+import DeleteAddOn from "@/components/package/deleteAddOn";
+import DeleteFacilities from "@/components/package/deleteFacilities";
 import DeletePoto from "@/components/package/deletePoto";
 import EditDetail from "@/components/package/editDetail";
+import getBaseURL from "@/libs/getBaseURL";
 import { getCookie } from "cookies-next";
 import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 const fetchData = async (id) => {
   try {
@@ -27,10 +31,49 @@ const fetchData = async (id) => {
   }
 };
 
+const fetchFacilities = async () => {
+  try {
+    const req = await fetch(getBaseURL("/facilities"), {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${getCookie("accessToken", { cookies })}`,
+      },
+    });
+
+    const res = await req.json();
+    return res.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+const fetchAddOns = async () => {
+  try {
+    const req = await fetch(getBaseURL("/addOns"), {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${getCookie("accessToken", { cookies })}`,
+      },
+    });
+
+    const res = await req.json();
+    return res.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 const Page = async ({ params }) => {
   const { id } = params;
 
-  const data = await fetchData(id);
+  const [data, facilities, addOns] = await Promise.all([
+    fetchData(id),
+    fetchFacilities(),
+    fetchAddOns(),
+  ]);
+
 
   if (data?.description === null || data === null) {
     return (
@@ -111,7 +154,12 @@ const Page = async ({ params }) => {
           <h1 className="text-lg font-semibold text-rinjaniVisitor-green">
             Facilties
           </h1>
-          <p className="text-base">{data?.facilities.join()}</p>
+          <DeleteFacilities
+            data={{
+              facilities: data.facilities,
+              facilitiesId: data.facilitiesId,
+            }}
+          />
         </div>
         <div className="mb-4">
           <h1 className="text-lg font-semibold text-rinjaniVisitor-green">
@@ -123,9 +171,9 @@ const Page = async ({ params }) => {
           <h1 className="text-lg font-semibold text-rinjaniVisitor-green">
             Add On
           </h1>
-          <p className="text-base">
-            {data.addOns.length > 0 ? data.addOns.join(", ") : "-"}
-          </p>
+          <DeleteAddOn
+            data={{ addOns: data?.addOns, addOnsId: data?.addOnsId }}
+          />
         </div>
       </div>
       <h1 className="text-lg font-semibold text-rinjaniVisitor-green">Foto</h1>
@@ -159,6 +207,8 @@ const Page = async ({ params }) => {
       <div className="absolute right-0 top-0 flex space-x-4">
         <AddFoto packageId={id} />
         <EditDetail data={data} />
+        <AddFacilities data={facilities} />
+        <AddAddOn data={addOns} />
       </div>
     </div>
   );

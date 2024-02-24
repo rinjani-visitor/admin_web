@@ -7,18 +7,17 @@ import { useState } from "react";
 
 const EditDetail = ({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [description, setDesription] = useState(data?.description);
-  const [duration, setDuration] = useState(data?.duration);
-  const [program, setProgram] = useState(data?.program);
-  const [note, setNote] = useState(data?.note);
-  const [route, setRoute] = useState(data?.route);
-  const [startDate, setStartDate] = useState(data?.startDate);
-  const [endDate, setEndDate] = useState(data?.endDate);
+  const [description, setDesription] = useState(data?.description || "");
+  const [duration, setDuration] = useState(data?.duration || "");
+  const [program, setProgram] = useState(data?.program || "");
+  const [note, setNote] = useState(data?.note || "");
+  const [route, setRoute] = useState(data?.route || "");
+  const [startDate, setStartDate] = useState(data?.startDate || "");
+  const [endDate, setEndDate] = useState(data?.endDate || "");
 
   const handlerModal = () => {
     setIsOpen(!isOpen);
   };
-  console.log(data.productId);
 
   const endpoint = {
     rinjani: `/products/rinjani`,
@@ -84,7 +83,7 @@ const EditDetail = ({ data }) => {
     <>
       <button
         onClick={handlerModal}
-        className="btn btn-primary aspect-square p-0 btn-sm items-center"
+        className="btn aspect-square p-0 btn-sm items-center"
       >
         <DotsThreeCircle size={24} />
       </button>

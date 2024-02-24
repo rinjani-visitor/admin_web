@@ -18,10 +18,7 @@ const AddFoto = ({ packageId }) => {
 
   const router = useRouter();
 
-  const handlerModal = () => {
-    setIsOpen(!isOpen);
-  };
-
+  const handlerModal = () => setIsOpen(!isOpen);
   const submitPhotos = async (e) => {
     setIsLoading(true);
     e.preventDefault();
@@ -64,9 +61,9 @@ const AddFoto = ({ packageId }) => {
     <>
       <button
         onClick={handlerModal}
-        className="btn btn-warning aspect-square p-0 btn-sm items-center"
+        className="btn  aspect-square p-0 btn-sm items-center"
       >
-        <Image size={24} fill="white" />
+        <Image size={24} fill="" />
       </button>
       <div className={`modal ${isOpen ? "modal-open" : ""}`}>
         <div className="modal-box">
