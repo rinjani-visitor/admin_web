@@ -1,48 +1,57 @@
-"use client"
+"use client";
 
-import getBaseURL from "@/libs/getBaseURL"
-import { X } from "@phosphor-icons/react/dist/ssr"
-import { getCookie } from "cookies-next"
-import { useRouter } from "next/navigation"
+import getBaseURL from "@/libs/getBaseURL";
+import useStore from "@/store";
+import { X } from "@phosphor-icons/react/dist/ssr";
+import { getCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 
 const Declined = ({ paymentId }) => {
-  const router = useRouter()
+  const router = useRouter();
+
+  const { isLoading, setIsLoading } = useStore();
 
   const declinedPayment = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
+    setIsLoading(true);
     const body = {
-      paymentStatus: 'Rejected'
-    }
+      paymentStatus: "Rejected",
+    };
 
     console.log(body);
     try {
       const response = await fetch(getBaseURL(`/payment/${paymentId}`), {
         method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${getCookie('accessToken')}`
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getCookie("accessToken")}`,
         },
-        body: JSON.stringify(body)
-      })
+        body: JSON.stringify(body),
+      });
 
-      const result = await response.json()
+      const result = await response.json();
       console.log(result);
 
       if (response.ok) {
-        router.refresh()
+        router.refresh();
       }
     } catch (error) {
-      console.log('Error Approve:', error);
+      console.log("Error Approve:", error);
+    } finally {
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <>
-      <button onClick={declinedPayment} className="btn btn-error aspect-square p-0 btn-sm items-center">
+      <button
+        onClick={declinedPayment}
+        className="btn btn-error aspect-square p-0 btn-sm items-center"
+      >
         <X size={24} color="#fcfcfc" />
       </button>
     </>
-  )
-}
+  );
+};
 
-export default Declined
+export default Declined;

@@ -112,7 +112,7 @@ const AddPackage = ({ data, sub }) => {
                 <option value={``} disabled>
                   Pilih Kategori?
                 </option>
-                {data.map((item, index) => (
+                {data?.map((item, index) => (
                   <option
                     className="capitalize"
                     key={index}
