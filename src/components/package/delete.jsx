@@ -1,6 +1,7 @@
 "use client";
 
 import getBaseURL from "@/libs/getBaseURL";
+import useStore from "@/store";
 import { X } from "@phosphor-icons/react/dist/ssr";
 import { getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
@@ -9,6 +10,8 @@ import { useState } from "react";
 const Delete = ({ PackageId }) => {
   const router = useRouter();
 
+  const { isLoading, setIsLoading } = useStore();
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handlerModal = () => {
@@ -16,6 +19,7 @@ const Delete = ({ PackageId }) => {
   };
 
   const declinedBooking = async (event) => {
+    setIsLoading(true);
     event.preventDefault();
 
     try {
@@ -29,12 +33,20 @@ const Delete = ({ PackageId }) => {
 
       const result = await response.json();
 
+      console.log(result);
+
       if (response.ok) {
-        setIsOpen(false);
         router.refresh();
+      } else {
+        alert(
+          "Only product with booking status success or declined can be deleted"
+        );
       }
     } catch (error) {
       console.log("Error Approve:", error);
+    } finally {
+      setIsOpen(false);
+      setIsLoading(false);
     }
   };
 
