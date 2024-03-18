@@ -101,7 +101,7 @@ const Page = async ({ params }) => {
               <h1 className="text-lg font-semibold text-rinjaniVisitor-green">
                 Add On
               </h1>
-              {data?.addOns.length > 0 ? (
+              {data?.addOns?.length > 0 ? (
                 <p className="text-base">{data?.addOns}</p>
               ) : (
                 <p className="text-base">No Add On</p>

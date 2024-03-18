@@ -6,9 +6,12 @@ import { useState } from "react";
 import { analytics } from "@/app/firebase/firebase-config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { getCookie } from "cookies-next";
+import useStore from "@/store";
 
 const AddPackage = ({ data, sub }) => {
   const router = useRouter();
+
+  const { isLoading, setIsLoading } = useStore();
 
   const [isOpen, setIsOpen] = useState(false);
   const [subCategory, setSubCategory] = useState([]);
@@ -25,11 +28,15 @@ const AddPackage = ({ data, sub }) => {
   };
 
   const addPackage = async (event) => {
+    setIsLoading(!isLoading);
     event.preventDefault();
+    console.log(isLoading);
 
     try {
+      console.log("p");
       const fileRef = ref(analytics, `rinjanivisitor_admin/${file.name}`);
       uploadBytes(fileRef, file).then((data) => {
+        // setIsLoading(false);
         getDownloadURL(data.ref).then(async (url) => {
           const body = {
             title,
@@ -41,6 +48,8 @@ const AddPackage = ({ data, sub }) => {
             thumbnail: url,
           };
 
+          console.log(body);
+
           const response = await fetch(getBaseURL("/add-products"), {
             method: "POST",
             headers: {
@@ -50,9 +59,14 @@ const AddPackage = ({ data, sub }) => {
             body: JSON.stringify(body),
           });
 
+          const result = await response.json();
+
+          console.log(result);
+
           if (response.ok) {
             alert("Product added successfully");
-            router.refresh();
+            location.reload;
+            // router.refresh();
           } else {
             router.refresh();
             alert("Failed to add product. Server returned:");
@@ -63,6 +77,7 @@ const AddPackage = ({ data, sub }) => {
       console.error("Error during fetch operation:", error);
     } finally {
       setIsOpen(false);
+      setIsLoading(false);
     }
   };
 

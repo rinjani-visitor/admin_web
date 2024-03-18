@@ -40,6 +40,22 @@ const RootLayout = ({ children }) => {
                 Payment
               </Link>
             </li>
+            <li className="py-2">
+              <Link
+                href="/dashboard/facilities"
+                className="text-gray-400 hover:text-white"
+              >
+                Facilities
+              </Link>
+            </li>
+            <li className="py-2">
+              <Link
+                href="/dashboard/addons"
+                className="text-gray-400 hover:text-white"
+              >
+                Add Ons
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
