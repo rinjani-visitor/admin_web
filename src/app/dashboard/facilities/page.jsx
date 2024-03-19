@@ -1,3 +1,5 @@
+import AddFacilitiesItem from "@/components/facilities/add";
+import DeleteItemFacilities from "@/components/facilities/deleteItemFacilities";
 import getBaseURL from "@/libs/getBaseURL";
 import { getCookie } from "cookies-next";
 import { cookies } from "next/headers";
@@ -11,7 +13,7 @@ const fetchData = async () => {
     });
 
     const res = await request.json();
-    console.log(res.data);
+    return res.data;
   } catch (error) {
     console.error("Terjadi kesalahan:", error);
   }
@@ -20,7 +22,15 @@ const fetchData = async () => {
 const Page = async () => {
   const data = await fetchData();
 
-  return <div>Page Facilites</div>;
+  return (
+    <div>
+      <div className="flex justify-between">
+        <h1 className="text-2xl mb-2">Facilies</h1>
+        <AddFacilitiesItem />
+      </div>
+      <DeleteItemFacilities data={data} />
+    </div>
+  );
 };
 
 export default Page;

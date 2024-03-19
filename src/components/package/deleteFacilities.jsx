@@ -7,7 +7,6 @@ import { useState } from "react";
 
 const DeleteFacilities = ({ data }) => {
   const { id } = useParams();
-  const router = useRouter();
   const [facilities, setFacilities] = useState([]);
 
   const handleCheckboxChange = (id) => {
