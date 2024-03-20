@@ -25,10 +25,6 @@ const Page = async () => {
 
   const data = await fetchData();
 
-  if (!cookie) {
-    redirect("/");
-  }
-
   return (
     <div className="">
       <div className="grid grid-cols-3 gap-4">

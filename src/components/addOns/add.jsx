@@ -55,7 +55,7 @@ const AddAddOnsItem = () => {
           >
             ✕
           </button>
-          <h1 className="">Add Facilities</h1>
+          <h1 className="">Add Add Ons</h1>
           <input
             required
             type="text"

@@ -59,9 +59,9 @@ const fetchSubCategories = async () => {
 
 const Page = async () => {
   const cookie = hasCookie("accessToken", { cookies });
-  if (!cookie) {
-    redirect("/");
-  }
+  // if (!cookie) {
+  //   redirect("/");
+  // }
 
   const [data, categories, subCategories] = await Promise.all([
     fetchData(),

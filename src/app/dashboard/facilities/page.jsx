@@ -25,7 +25,7 @@ const Page = async () => {
   return (
     <div>
       <div className="flex justify-between">
-        <h1 className="text-2xl mb-2">Facilies</h1>
+        <h1 className="text-2xl mb-2">Facilities</h1>
         <AddFacilitiesItem />
       </div>
       <DeleteItemFacilities data={data} />
