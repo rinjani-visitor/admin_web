@@ -48,8 +48,6 @@ const AddPackage = ({ data, sub }) => {
             thumbnail: url,
           };
 
-          console.log(body);
-
           const response = await fetch(getBaseURL("/add-products"), {
             method: "POST",
             headers: {

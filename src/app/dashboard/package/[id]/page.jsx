@@ -14,7 +14,7 @@ import Link from "next/link";
 const fetchData = async (id) => {
   try {
     const req = await fetch(
-      `https://rinjani-api-v2-nvyjfyoxzq-et.a.run.app/api/products/${id}`,
+      `https://rinjani-visitor-api.onrender.com/api/products/${id}`,
       {
         method: "GET",
         headers: {
@@ -24,6 +24,7 @@ const fetchData = async (id) => {
     );
 
     const res = await req.json();
+    console.log(res);
     return res.data;
   } catch (error) {
     console.error(error);
@@ -41,6 +42,7 @@ const fetchFacilities = async () => {
     });
 
     const res = await req.json();
+    console.log(res);
     return res.data;
   } catch (error) {
     console.error(error);
@@ -58,6 +60,7 @@ const fetchAddOns = async () => {
     });
 
     const res = await req.json();
+    console.log(res);
     return res.data;
   } catch (error) {
     console.error(error);
@@ -73,7 +76,6 @@ const Page = async ({ params }) => {
     fetchFacilities(),
     fetchAddOns(),
   ]);
-
 
   if (data?.description === null || data === null) {
     return (
@@ -140,7 +142,7 @@ const Page = async ({ params }) => {
           </h1>
           <p className="text-base">
             {data?.description
-              ? data.description
+              ? data?.description
               : "Tambahkan Detail deskripsi"}
           </p>
         </div>
@@ -156,8 +158,8 @@ const Page = async ({ params }) => {
           </h1>
           <DeleteFacilities
             data={{
-              facilities: data.facilities,
-              facilitiesId: data.facilitiesId,
+              facilities: data?.facilities,
+              facilitiesId: data?.facilitiesId,
             }}
           />
         </div>
@@ -188,7 +190,7 @@ const Page = async ({ params }) => {
               alt="asd"
               className="aspect-square h-48 object-cover"
             />
-            <DeletePoto id={id} photoId={item.fotoId} />
+            <DeletePoto id={id} photoId={item?.fotoId} />
           </div>
         ))}
       </div>
