@@ -25,6 +25,8 @@ const Page = async () => {
 
   const data = await fetchData();
 
+  console.log(data);
+
   return (
     <div className="">
       <div className="grid grid-cols-3 gap-4">
@@ -33,7 +35,9 @@ const Page = async () => {
             key={key}
             className="mb-4 bg-slate-500 p-4 rounded-lg flex flex-col items-center text-white"
           >
-            <p className="font-normal">{key}</p>
+            <p className="font-normal capitalize">
+              {key.split(/(?=[A-Z])/).join(" ")}
+            </p>
             <p className="text-4xl font-semibold">{value}</p>
           </div>
         ))}
