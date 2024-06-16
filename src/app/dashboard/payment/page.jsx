@@ -71,7 +71,7 @@ const Page = async () => {
                       </>
                     ) : null
                   }
-                  {item.paymentStatus !== 'Pending' ?
+                  {item.paymentStatus !== 'Pending' && item.paymentStatus !== 'Rejected' ?
                     (
                       <DetailPayment {...item} />
                     ) : null
