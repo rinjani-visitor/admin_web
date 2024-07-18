@@ -33,7 +33,6 @@ const AddPackage = ({ data, sub }) => {
     console.log(isLoading);
 
     try {
-      console.log("p");
       const fileRef = ref(analytics, `rinjanivisitor_admin/${file.name}`);
       uploadBytes(fileRef, file).then((data) => {
         // setIsLoading(false);
