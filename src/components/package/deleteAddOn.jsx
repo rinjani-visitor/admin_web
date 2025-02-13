@@ -10,6 +10,8 @@ const DeleteAddOn = ({ data }) => {
   const router = useRouter();
   const [facilities, setFacilities] = useState([]);
 
+  console.log(data);
+
   const handleCheckboxChange = (id) => {
     const isChecked = facilities.includes(id);
     if (isChecked) {
@@ -19,12 +21,7 @@ const DeleteAddOn = ({ data }) => {
     }
   };
 
-  const resultArray = data.addOnsId.map((facilityId, index) => ({
-    facilityId,
-    facilityName: data.addOns[index],
-  }));
-
-  if (resultArray.length < 1) {
+  if (data.length < 1) {
     return <p>No one Add On</p>;
   }
 
@@ -58,20 +55,21 @@ const DeleteAddOn = ({ data }) => {
 
   return (
     <form action="" onSubmit={deleteAddOns}>
-      {resultArray?.map((item, index) => (
+      {data?.addOns.map((item, index) => (
         <div key={index} className="flex items-center mb-4">
           <input
             // id={`checkbox-${index}`}
             type="checkbox"
-            value={item.facilityId}
+            value={item.addOnsId}
             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             onChange={(e) => handleCheckboxChange(e.target.value)}
           />
           <label
             // htmlFor={`checkbox-${index}`}
-            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            className="ms-2 text-sm font-medium text-black dark:text-gray-300"
           >
-            {item.facilityName}
+            {item.addOnsName}
+            (${item.price})
           </label>
         </div>
       ))}

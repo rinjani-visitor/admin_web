@@ -11,11 +11,11 @@ export default function PieChart({ dataBar }) {
   );
 
   const data = {
-    labels: dataBar.map((item) => item.category.toUpperCase()),
+    labels: dataBar?.map((item) => item.category.toUpperCase()),
     datasets: [
       {
         label: "Total",
-        data: dataBar.map((item) => item.totalPayments),
+        data: dataBar?.map((item) => item.totalPayments),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",

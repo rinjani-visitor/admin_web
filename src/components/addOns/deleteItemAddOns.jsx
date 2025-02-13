@@ -10,6 +10,8 @@ const DeleteItemAddOns = ({ data }) => {
 
   const { isLoading, setIsLoading } = useStore();
 
+  console.log(data)
+
   const handleCheckboxChange = (id) => {
     const isChecked = facilities.includes(id);
     if (isChecked) {
@@ -62,7 +64,7 @@ const DeleteItemAddOns = ({ data }) => {
               onChange={(e) => handleCheckboxChange(e.target.value)}
             />
             <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-              {item.addOnsName}
+              {item.addOnsName} (${item.price})
             </label>
           </div>
         ))}

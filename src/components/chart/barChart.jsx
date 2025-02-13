@@ -25,11 +25,11 @@ export default function BarChart({ dataBar, title }) {
   const keys = Object.keys(dataBar[0]);
 
   const data = {
-    labels: dataBar.map((item) => item[keys[0]]),
+    labels: dataBar?.map((item) => item[keys[0]]),
     datasets: [
       {
         label: "Total",
-        data: dataBar.map((item) => item[keys[1]]),
+        data: dataBar?.map((item) => item[keys[1]]),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",

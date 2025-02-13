@@ -14,7 +14,7 @@ import Link from "next/link";
 const fetchData = async (id) => {
   try {
     const req = await fetch(
-      `https://rinjani-visitor-api.onrender.com/api/products/${id}`,
+      `https://rinjani-visitor-api-cybrddhtca-et.a.run.app/api/products/${id}`,
       {
         method: "GET",
         headers: {
@@ -24,7 +24,7 @@ const fetchData = async (id) => {
     );
 
     const res = await req.json();
-    console.log(res);
+    // console.log(res);
     return res.data;
   } catch (error) {
     console.error(error);
@@ -60,7 +60,6 @@ const fetchAddOns = async () => {
     });
 
     const res = await req.json();
-    console.log(res);
     return res.data;
   } catch (error) {
     console.error(error);
