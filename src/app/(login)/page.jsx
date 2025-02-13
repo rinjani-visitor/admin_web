@@ -39,6 +39,9 @@ const Page = () => {
       });
 
       const result = await response.json();
+
+      console.log(body);
+      console.log(result);
       const { accessToken } = result;
 
       if (response.ok) {
