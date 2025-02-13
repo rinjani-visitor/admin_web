@@ -39,7 +39,7 @@ const DeleteItemFacilities = ({ data }) => {
 
       const res = await req.json();
       if (req.ok) {
-        alert("Succes Delete, silakan refresh");
+        alert("Success Delete Facilities, you can refresh this page");
       }
     } catch (error) {
       console.log(error.message);
@@ -61,7 +61,7 @@ const DeleteItemFacilities = ({ data }) => {
               className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               onChange={(e) => handleCheckboxChange(e.target.value)}
             />
-            <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+            <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-700">
               {item.facilityName}
             </label>
           </div>
